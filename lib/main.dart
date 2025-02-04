@@ -48,6 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (value == 'C') {
         input = '';
         result = '';
+      } else if (value == '^2') {
+        try {
+          Expression exp = Expression.parse('$input * $input');
+          final evaluator = const ExpressionEvaluator();
+          result = evaluator.eval(exp, {}).toString();
+          input += '^2 = $result';
+        } catch (e) {
+          result = 'Error';
+        }
       } else {
         input += value;
       }
@@ -79,7 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 '7', '8', '9', '/',
                 '4', '5', '6', '*',
                 '1', '2', '3', '-',
-                'C', '0', '=', '+'
+                'C', '0', '=', '+',
+                '^2'
               ].map((value) {
                 return ElevatedButton(
                   onPressed: () => onButtonPressed(value),
